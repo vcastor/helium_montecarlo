@@ -17,7 +17,7 @@ INTEGER i_path, i, j, l, n_paths
 REAL twopi, tau, prod, elocal, alpha, gam, xold(3,2), xnew(3,2), b(3,2), gauss
 REAL h(m_max), s(m_max), w(m_max), eloc(m_max)
 
-twopi=acos(-1.)
+twopi = 2.*ACOS(-1.)
 
 PRINT*,'N?'
 READ(*,*) n_paths
