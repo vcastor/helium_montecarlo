@@ -61,9 +61,9 @@ OPEN(11,FILE='He_Montecarlo.out')
 DO j = 1, m_max
     WRITE(11,*) 'time', j*tau, 'Energy = ', h(j)/s(j)
 ENDDO
-WRITE(*,*) '**************************************************************'
-WRITE(*,*) 'THE JOB WAS DONE AND ITS WRITEN IN THE FILE: He_Montecarlo.out'
-WRITE(*,*) '**************************************************************'
+WRITE(*,*) '***************************************************************'
+WRITE(*,*) 'THE JOB WAS DONE AND ITS WRITTEN IN THE FILE: He_Montecarlo.out'
+WRITE(*,*) '***************************************************************'
 WRITE(*,*) 'Sale, bye /(o.o)/'
 
 ENDPROGRAM QMC
