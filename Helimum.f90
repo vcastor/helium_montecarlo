@@ -1,21 +1,22 @@
 PROGRAM QMC
-!====================================================================
+!================================================================================
 !
-!This program was made by Professor:
-!and also share by him to his MSc students.
-!Some changes was made by me. But is still the main
-!idea. If you want to know more about the calculations read
-!the file attached in the main branch.
-
+!This program was made by Professor: Michel CAFFAREL and also share by him to
+!his MSc Students.  Some changes was made by me. But is still the main idea. If
+!you want to know more about the calculations read the file attached in the main
+!branch.
+!
 !VCastor
-!====================================================================
+!
+!================================================================================
+
 IMPLICIT NONE
 
 INTEGER m_max
 PARAMETER(m_max=1000)
-INTEGER i_path, i, j, l, n_paths
-REAL twopi, tau, prod, elocal, alpha, gam, xold(3,2), xnew(3,2), b(3,2), gauss
-REAL h(m_max), s(m_max), w(m_max), eloc(m_max)
+INTEGER :: i_path, i, j, l, n_paths
+REAL :: twopi, tau, prod, elocal, alpha, gam, xold(3,2), xnew(3,2), b(3,2), gauss
+REAL, DIMENSION(m_max) :: h, s, w, eloc
 
 twopi = 2.*ACOS(-1.)
 
@@ -25,13 +26,13 @@ tau = 0.0075
 alpha = 0.35
 gam = 2.
 
-h = 0.
-s = 0.
+h(:) = 0.
+s(:) = 0.
 
 DO i_path = 1, n_paths
     DO i = 1, 2
         DO l = 1, 3
-            xold(1,1) = 1. + RAND()
+            xold(l,i) = 1. + RAND()
         ENDDO
     ENDDO
 
@@ -40,24 +41,26 @@ DO i_path = 1, n_paths
         CALL drift(xold, b, gam, alpha)
             DO i = 1, 2
                 DO l = 1, 3
-                    xnew(l,i) = xold(l,i)+b(l,i)*tau+SQRT(tau)*gauss()
+                    xnew(l,i) = xold(l,i) + b(l,i)*tau + SQRT(tau)*gauss()
                 ENDDO
             ENDDO
-        eloc(j)=elocal(xnew,gam,alpha)
-        w(j)=exp(-tau*eloc(j))
-       xold=xnew
+        eloc(j) = elocal(xnew,gam,alpha)
+        w(j) = EXP(-tau*eloc(j))
+        xold = xnew
     ENDDO
 
     prod = 1.
     DO j = 1, m_max
         prod = prod*w(j)
-        h(j) = h(j) + prod * eloc(j)
+        h(j) = h(j) + prod*eloc(j)
         s(j) = s(j) + prod
     ENDDO
 ENDDO
 
 DO j = 1, m_max
     WRITE(*,*) 'time', j*tau, 'Energy = ', h(j)/s(j)
+!    WRITE(*,*) h(1), s(1)
+!    WRITE(*,*) prod
 ENDDO
 
 END
@@ -90,7 +93,7 @@ ENDDO
 
 END
 
-!====================================================================
+!================================================================================
 
 FUNCTION elocal(x, gam, alpha)
 
@@ -115,7 +118,7 @@ elocal = elocal - 2.*u/r12 + gam*u*prod
 
 END
 
-!====================================================================
+!================================================================================
 !    BOX MULLER GAUSSIAN GENERATOR
 
 FUNCTION gauss()
