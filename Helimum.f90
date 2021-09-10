@@ -59,8 +59,6 @@ ENDDO
 
 DO j = 1, m_max
     WRITE(*,*) 'time', j*tau, 'Energy = ', h(j)/s(j)
-!    WRITE(*,*) h(1), s(1)
-!    WRITE(*,*) prod
 ENDDO
 
 END
