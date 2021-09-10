@@ -12,7 +12,7 @@ PROGRAM QMC
 
 IMPLICIT NONE
 
-INTEGER m_max
+INTEGER :: m_max
 PARAMETER(m_max=1000)
 INTEGER :: i_path, i, j, l, n_paths
 REAL :: twopi, tau, prod, elocal, alpha, gam, xold(3,2), xnew(3,2), b(3,2), gauss
@@ -61,18 +61,18 @@ DO j = 1, m_max
     WRITE(*,*) 'time', j*tau, 'Energy = ', h(j)/s(j)
 ENDDO
 
-END
+ENDPROGRAM QMC
 
-!====================================================================
+!================================================================================
 !     SUBROUTINES AND FUNCTIONS
-!====================================================================
+!================================================================================
 
 SUBROUTINE DRIFT(x, b, gam, alpha)
 
 IMPLICIT NONE
 
-INTEGER i, l
-REAL x(3,2), b(3,2), gam, alpha, r(2), r12, u
+INTEGER :: i, l
+REAL :: x(3,2), b(3,2), gam, alpha, r(2), r12, u
 
 DO i = 1, 2
     r(i) = SQRT(x(1,i)**2 + x(2,i)**2 + x(3,i)**2)
@@ -97,8 +97,8 @@ FUNCTION elocal(x, gam, alpha)
 
 IMPLICIT NONE
 
-REAL elocal, x(3,2), alpha, gam, r(2), r12, u, prod
-INTEGER l
+REAL :: elocal, x(3,2), alpha, gam, r(2), r12, u, prod
+INTEGER :: l
 
 r(1)   = SQRT(x(1,1)**2 + x(2,1)**2 + x(3,1)**2)
 r(2)   = SQRT(x(1,2)**2 + x(2,2)**2 + x(3,2)**2)
@@ -127,3 +127,6 @@ v = RAND()
 gauss = SQRT(-2.*u)*COS(twopi*v)
 
 END
+
+!================================================================================
+!    This program does not have easter eggs on the source code, sorry :c
